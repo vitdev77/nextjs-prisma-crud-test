@@ -1,36 +1,52 @@
-import prisma from "@/lib/prisma";
-import { brands, series } from "./data-for-seeding";
+import { PrismaClient, Prisma } from "@/generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+import "dotenv/config";
 
-async function up() {
-  await prisma.brand.createMany({
-    data: brands,
-  });
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
 
-  await prisma.series.createMany({
-    data: series,
-  });
-}
+const prisma = new PrismaClient({
+  adapter,
+});
 
-async function down() {
-  await prisma.$executeRaw`TRUNCATE TABLE "brands" RESTART IDENTITY CASCADE`;
-  await prisma.$executeRaw`TRUNCATE TABLE "series" RESTART IDENTITY CASCADE`;
-}
+const userData: Prisma.UserCreateInput[] = [
+  {
+    name: "Alice",
+    email: "alice@prisma.io",
+    posts: {
+      create: [
+        {
+          title: "Join the Prisma Discord",
+          content: "https://pris.ly/discord",
+          published: true,
+        },
+        {
+          title: "Prisma on YouTube",
+          content: "https://pris.ly/youtube",
+        },
+      ],
+    },
+  },
+  {
+    name: "Bob",
+    email: "bob@prisma.io",
+    posts: {
+      create: [
+        {
+          title: "Follow Prisma on Twitter",
+          content: "https://www.twitter.com/prisma",
+          published: true,
+        },
+      ],
+    },
+  },
+];
 
-async function main() {
-  try {
-    await down();
-    await up();
-  } catch (e) {
-    console.error(e);
+export async function main() {
+  for (const u of userData) {
+    await prisma.user.create({ data: u });
   }
 }
 
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    prisma.$disconnect();
-    process.exit(1);
-  });
+main();
