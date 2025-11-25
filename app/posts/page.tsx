@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import prisma from "@/lib/prisma";
-import { Check, Eye, Pen, Trash2, X } from "lucide-react";
+import { Check, Eye, Pen, Plus, Trash2, X } from "lucide-react";
 import Link from "next/link";
 
 export default async function Posts() {
@@ -23,9 +23,19 @@ export default async function Posts() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center -mt-16 text-[#333333]">
-      <h1 className="text-4xl font-bold mb-8 font-sans">Posts</h1>
-      <div className="max-w-4xl mx-auto border rounded-lg p-4 bg-card">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center gap-6 text-[#333333]">
+      <div>
+        <div className="flex items-center justify-between gap-6">
+          <h1 className="text-4xl font-bold">Posts</h1>
+          <Button asChild>
+            <Link href={"/posts/new"}>
+              <Plus /> Create new
+            </Link>
+          </Button>
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -80,22 +90,6 @@ export default async function Posts() {
           </TableBody>
         </Table>
       </div>
-
-      {/* <ul className="font-sans max-w-2xl space-y-4">
-        {posts.map((post) => (
-          <li key={post.id}>
-            <Link
-              href={`/posts/${post.id}`}
-              className="font-semibold text-blue-600 hover:underline"
-            >
-              {post.title}
-            </Link>
-            <span className="text-sm text-gray-600 ml-2">
-              by {post.author.name}
-            </span>
-          </li>
-        ))}
-      </ul> */}
     </div>
   );
 }
