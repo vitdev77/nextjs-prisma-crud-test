@@ -1,0 +1,16 @@
+export const brands = [
+  { name: "Midea", imageUrl: "/brands/midea.png" }, // 1
+  { name: "General Electronics", imageUrl: "/brands/general-electronics.webp" }, // 2
+  { name: "DEXP", imageUrl: "/brands/dexp.png" }, // 3
+  { name: "Körting", imageUrl: "/brands/koerting.svg" }, // 4
+  { name: "Schaub Lorenz", imageUrl: "/brands/schaub-lorenz.png" }, // 5
+];
+
+export const series = [
+  { name: "BCD345", brandId: 1 }, // 1
+  { name: "BCD385", brandId: 1 }, // 2
+  { name: "BCD405", brandId: 1 }, // 3
+  { name: "BCD445", brandId: 1 }, // 4
+  { name: "BCD335", brandId: 1 }, // 5
+  { name: "BCD375", brandId: 1 }, // 6
+];

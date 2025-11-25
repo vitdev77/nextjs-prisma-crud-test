@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Brand {
+  id Int @id @default(autoincrement())
+
+  name     String
+  imageUrl String?
+
+  series Series[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("brands")
+}
+
+model Series {
+  id Int @id @default(autoincrement())
+
+  name String
+
+  brandId Int
+  brand   Brand @relation(fields: [brandId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("series")
+}
