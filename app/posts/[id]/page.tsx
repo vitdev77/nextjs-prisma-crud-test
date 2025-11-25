@@ -1,4 +1,7 @@
+import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function Post({
@@ -27,6 +30,11 @@ export default async function Post({
           {post.content || "No content available."}
         </div>
       </article>
+      <Button className="mt-12" variant={"secondary"} asChild>
+        <Link href={"/posts"}>
+          <ArrowLeft /> Back to Posts
+        </Link>
+      </Button>
     </div>
   );
 }
