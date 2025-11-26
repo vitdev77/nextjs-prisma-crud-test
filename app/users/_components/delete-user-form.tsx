@@ -14,17 +14,17 @@ import {
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { deletePost } from "@/actions/post.actions";
+import { deleteUser } from "@/actions/user.actions";
 import { toast } from "sonner";
 
-export function DeletePostForm({ id }: { id: string }) {
+export function DeleteUserForm({ id }: { id: string }) {
   const handleDelete = async () => {
-    const postId = id;
-    const res = await deletePost({ postId });
+    const userId = id;
+    const res = await deleteUser({ userId });
     if (res?.error) {
       toast.error(res.error);
     } else {
-      toast.success("Post successfully deleted");
+      toast.success("User successfully deleted");
     }
   };
 
@@ -40,8 +40,8 @@ export function DeletePostForm({ id }: { id: string }) {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete this post
-            and remove data from servers.
+            This action cannot be undone. This will permanently delete this user
+            and all users posts from servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

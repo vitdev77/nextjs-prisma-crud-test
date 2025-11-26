@@ -34,7 +34,7 @@ export default function RootLayout({
         className={`${robotoFlex.className} ${geistMono.variable} antialiased`}
       >
         {children}
-        <Toaster />
+        <Toaster position={"top-center"} richColors />
       </body>
     </html>
   );

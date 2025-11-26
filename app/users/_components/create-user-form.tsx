@@ -21,37 +21,42 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Pen } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { cn } from "@/lib/utils";
-import { toast } from "sonner";
+import { Plus } from "lucide-react";
 import { LoadingButton } from "@/components/loading-button";
-import { editPost } from "@/actions/post.actions";
+import { toast } from "sonner";
+import { createUser } from "@/actions/user.actions";
 
-const editPostSchema = z.object({
-  title: z.string().min(1, { message: "Title is required" }),
-  content: z.string().min(1, { message: "Content is required" }),
+const newUserSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z.email("Invalid email address format"),
 });
 
-type EditPostValues = z.infer<typeof editPostSchema>;
+type NewUserValues = z.infer<typeof newUserSchema>;
 
-export function EditPostForm({ id }: { id: string }) {
+export function CreateUserForm() {
   const [open, setOpen] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
-  const form = useForm<EditPostValues>({
-    resolver: zodResolver(editPostSchema),
+  const form = useForm<NewUserValues>({
+    resolver: zodResolver(newUserSchema),
     defaultValues: {
-      title: "",
-      content: "",
+      name: "",
+      email: "",
     },
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    toast.success(JSON.stringify(data));
-    setOpen(false);
+    const res = await createUser(data);
+    if (res?.error) {
+      toast.error(res.error);
+    } else {
+      toast.success("New post successfully created");
+      setOpen(false);
+      form.reset();
+    }
   });
 
   const loading = form.formState.isSubmitting;
@@ -59,17 +64,15 @@ export function EditPostForm({ id }: { id: string }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size={"icon-sm"} variant={"ghost"}>
-          <Pen />
-          <span className="sr-only">Edit</span>
+        <Button>
+          <Plus /> New user
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit post</DialogTitle>
+          <DialogTitle>Add new user</DialogTitle>
           <DialogDescription>
-            All form fields are required. Click button below when you&apos;re
-            done.
+            Fill all form fields. Click button below when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
 
@@ -77,12 +80,12 @@ export function EditPostForm({ id }: { id: string }) {
           <form onSubmit={onSubmit} className="space-y-4">
             <FormField
               control={form.control}
-              name="title"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Title" disabled={loading} {...field} />
+                    <Input placeholder="Name" disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -91,13 +94,13 @@ export function EditPostForm({ id }: { id: string }) {
 
             <FormField
               control={form.control}
-              name="content"
+              name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Content</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Content here..."
+                      placeholder="Email here..."
                       disabled={loading}
                       {...field}
                     />

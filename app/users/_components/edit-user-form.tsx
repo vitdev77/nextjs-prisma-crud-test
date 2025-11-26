@@ -25,27 +25,25 @@ import { Pen } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { LoadingButton } from "@/components/loading-button";
-import { editPost } from "@/actions/post.actions";
 
-const editPostSchema = z.object({
-  title: z.string().min(1, { message: "Title is required" }),
-  content: z.string().min(1, { message: "Content is required" }),
+const editUserSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z.email("Invalid email address format"),
 });
 
-type EditPostValues = z.infer<typeof editPostSchema>;
+type EditUserValues = z.infer<typeof editUserSchema>;
 
-export function EditPostForm({ id }: { id: string }) {
+export function EditUserForm({ id }: { id: string }) {
   const [open, setOpen] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
-  const form = useForm<EditPostValues>({
-    resolver: zodResolver(editPostSchema),
+  const form = useForm<EditUserValues>({
+    resolver: zodResolver(editUserSchema),
     defaultValues: {
-      title: "",
-      content: "",
+      name: "",
+      email: "",
     },
   });
 
@@ -66,7 +64,7 @@ export function EditPostForm({ id }: { id: string }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit post</DialogTitle>
+          <DialogTitle>Edit user</DialogTitle>
           <DialogDescription>
             All form fields are required. Click button below when you&apos;re
             done.
@@ -77,12 +75,12 @@ export function EditPostForm({ id }: { id: string }) {
           <form onSubmit={onSubmit} className="space-y-4">
             <FormField
               control={form.control}
-              name="title"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Title" disabled={loading} {...field} />
+                    <Input placeholder="Name" disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -91,13 +89,13 @@ export function EditPostForm({ id }: { id: string }) {
 
             <FormField
               control={form.control}
-              name="content"
+              name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Content</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Content here..."
+                      placeholder="Email here..."
                       disabled={loading}
                       {...field}
                     />
