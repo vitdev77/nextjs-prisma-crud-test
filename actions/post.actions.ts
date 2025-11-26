@@ -1,0 +1,105 @@
+"use server";
+
+import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
+
+// Get all posts
+export async function getPosts() {
+  try {
+    const posts = await prisma.post.findMany({
+      include: {
+        author: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return posts;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    // You can handle the error in various ways:
+    // - Return an empty array or a specific error object
+    // - Throw a custom error
+    // - Log the error to a monitoring service
+    throw new Error("Failed to retrieve posts from the database.");
+  } finally {
+    // Optional: Disconnect Prisma Client after the operation
+    await prisma.$disconnect();
+  }
+}
+
+// Create new post
+interface CreatePostProps {
+  title: string;
+  content: string;
+  authorId: string;
+}
+
+export async function createPost({
+  title,
+  content,
+  authorId,
+}: CreatePostProps) {
+  try {
+    await prisma.post.create({
+      data: {
+        title,
+        content,
+        authorId: parseInt(authorId),
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return {
+      error: "SERVER ERROR",
+    };
+  }
+
+  revalidatePath("/posts");
+}
+
+// Edit single post
+interface editPostProps {
+  postId: string;
+  title: string;
+  content: string;
+}
+export async function editPost({ postId, title, content }: editPostProps) {
+  try {
+    await prisma.post.update({
+      where: {
+        id: parseInt(postId),
+      },
+      data: {
+        title,
+        content,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return {
+      error: "SERVER ERROR",
+    };
+  }
+
+  revalidatePath("/posts");
+}
+
+// Delete single post
+export async function deletePost({ postId }: { postId: string }) {
+  try {
+    await prisma.post.delete({
+      where: {
+        id: parseInt(postId),
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return {
+      error: "SERVER ERROR",
+    };
+  }
+
+  revalidatePath("/posts");
+}

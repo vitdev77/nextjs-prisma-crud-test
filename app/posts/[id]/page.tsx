@@ -24,7 +24,9 @@ export default async function Post({
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
       <article className="max-w-2xl space-y-4 font-sans">
-        <h1 className="text-4xl font-bold mb-8 text-[#333333]">{post.title}</h1>
+        <h1 className="text-4xl text-center font-bold mb-8 text-[#333333]">
+          {post.title}
+        </h1>
         <p className="text-gray-600 text-center">by {post.author.name}</p>
         <div className="prose prose-gray mt-8 text-center">
           {post.content || "No content available."}

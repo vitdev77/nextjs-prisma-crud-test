@@ -2,19 +2,23 @@ import Form from "next/form";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
-export default function NewPost() {
+export default async function NewPost() {
+  const authors = await prisma.user.findMany();
+
   async function createPost(formData: FormData) {
     "use server";
 
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
+    const authorId = formData.get("author") as string;
 
     await prisma.post.create({
       data: {
         title,
         content,
-        authorId: 1,
+        authorId: Number(authorId),
       },
     });
 
@@ -36,6 +40,7 @@ export default function NewPost() {
             name="title"
             placeholder="Enter your post title"
             className="w-full px-4 py-2 border rounded-lg"
+            required
           />
         </div>
         <div>
@@ -50,12 +55,25 @@ export default function NewPost() {
             className="w-full px-4 py-2 border rounded-lg"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600"
-        >
+        <div>
+          <label htmlFor="author" className="block text-lg mb-2">
+            Author
+          </label>
+          <select
+            id="author"
+            name="author"
+            className="w-full px-4 py-2 border rounded-lg"
+          >
+            {authors.map((author) => (
+              <option key={author.id} value={author.id}>
+                {author.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <Button type="submit" className="w-full">
           Create Post
-        </button>
+        </Button>
       </Form>
     </div>
   );

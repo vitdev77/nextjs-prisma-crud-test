@@ -8,30 +8,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import prisma from "@/lib/prisma";
-import { Check, Eye, Pen, Plus, Trash2, X } from "lucide-react";
+import { Check, Eye, Pen, X } from "lucide-react";
 import Link from "next/link";
+import { CreatePostForm, DeletePostForm, EditPostForm } from "./_components";
+import { getPosts } from "@/actions/post.actions";
 
 export default async function Posts() {
-  const posts = await prisma.post.findMany({
-    include: {
-      author: true,
-    },
-    orderBy: {
-      id: "asc",
-    },
-  });
+  const posts = await getPosts();
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center gap-6 text-[#333333]">
       <div>
         <div className="flex items-center justify-between gap-6">
           <h1 className="text-4xl font-bold">Posts</h1>
-          <Button asChild>
-            <Link href={"/posts/new"}>
-              <Plus /> Create new
-            </Link>
-          </Button>
+          <CreatePostForm />
         </div>
       </div>
 
@@ -50,7 +40,12 @@ export default async function Posts() {
           <TableBody>
             {posts.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6}>no posts found</TableCell>
+                <TableCell
+                  colSpan={6}
+                  className="text-center text-muted-foreground"
+                >
+                  no posts found
+                </TableCell>
               </TableRow>
             ) : (
               posts.map((post) => (
@@ -74,14 +69,8 @@ export default async function Posts() {
                           <span className="sr-only">View</span>
                         </Link>
                       </Button>
-                      <Button size={"icon-sm"}>
-                        <Pen />
-                        <span className="sr-only">Edit</span>
-                      </Button>
-                      <Button size={"icon-sm"} variant={"destructive"}>
-                        <Trash2 />
-                        <span className="sr-only">Delete</span>
-                      </Button>
+                      <EditPostForm id={String(post.id)} />
+                      <DeletePostForm id={String(post.id)} />
                     </div>
                   </TableCell>
                 </TableRow>
