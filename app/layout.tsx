@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Roboto_Flex } from "next/font/google";
-import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "@/components/ui/sonner";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body
         className={`${robotoFlex.className} ${geistMono.variable} antialiased`}
       >
+        <NextTopLoader showSpinner={false} height={1} color="#171717" />
         {children}
         {modal}
         <Toaster position={"top-center"} richColors />
