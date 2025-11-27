@@ -29,6 +29,28 @@ export async function getPosts() {
   }
 }
 
+// Get single post
+export async function getPostById({ postId }: { postId: string }) {
+  try {
+    const singlePost = await prisma.post.findFirst({
+      where: {
+        id: Number(postId),
+      },
+      include: {
+        author: true,
+      },
+    });
+
+    return singlePost;
+  } catch (err) {
+    console.error("Error fetching post:", err);
+    throw new Error("Failed to retrieve post from the database.");
+  } finally {
+    // Optional: Disconnect Prisma Client after the operation
+    await prisma.$disconnect();
+  }
+}
+
 // Create new post
 interface CreatePostProps {
   title: string;
@@ -46,7 +68,7 @@ export async function createPost({
       data: {
         title,
         content,
-        authorId: parseInt(authorId),
+        authorId: Number(authorId),
       },
     });
   } catch (error) {
@@ -69,7 +91,7 @@ export async function editPost({ postId, title, content }: editPostProps) {
   try {
     await prisma.post.update({
       where: {
-        id: parseInt(postId),
+        id: Number(postId),
       },
       data: {
         title,
@@ -91,7 +113,7 @@ export async function deletePost({ postId }: { postId: string }) {
   try {
     await prisma.post.delete({
       where: {
-        id: parseInt(postId),
+        id: Number(postId),
       },
     });
   } catch (error) {

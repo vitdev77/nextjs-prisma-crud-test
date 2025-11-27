@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { CreatePostComponent } from "@/components/create-post-component";
 
 interface Props {
   className?: string;
@@ -24,9 +25,10 @@ export const CreatePostModal: React.FC<Props> = ({ className }) => {
         className={cn("sm:max-w-[425px]", className)}
       >
         <VisuallyHidden>
-          <DialogTitle>Create New Post Form</DialogTitle>
+          <DialogTitle>Create New Post</DialogTitle>
         </VisuallyHidden>
-        <div>Create New Post Form Here</div>
+
+        <CreatePostComponent />
         {/* <PostForm post={post} _onSubmit={onCloseModal} /> */}
       </DialogContent>
     </Dialog>
