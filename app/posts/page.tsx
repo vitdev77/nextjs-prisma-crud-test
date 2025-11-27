@@ -1,3 +1,4 @@
+import { ArrowLeft, Check, Eye, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -8,9 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowLeft, Check, Eye, X } from "lucide-react";
 import Link from "next/link";
-import { CreatePostForm, DeletePostForm, EditPostForm } from "./_components";
+import {
+  CreatePostForm,
+  DeletePostForm,
+  EditPostForm,
+} from "@/components/forms";
 import { getPosts } from "@/actions/post.actions";
 
 export default async function Posts() {
@@ -22,6 +26,11 @@ export default async function Posts() {
         <div className="flex flex-wrap items-center gap-4">
           <h1 className="text-4xl font-bold">Posts</h1>
           <CreatePostForm />
+          <Button asChild>
+            <Link href={"/posts/new"}>
+              <Plus /> New post
+            </Link>
+          </Button>
         </div>
         <Button variant={"link"} asChild>
           <Link href="/users">
