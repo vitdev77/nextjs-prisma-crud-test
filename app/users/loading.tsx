@@ -13,7 +13,7 @@ export default function loading() {
 
       <div className="min-w-4xl mx-auto space-y-2">
         <Skeleton className="w-full h-9" />
-        {[1, 2, 3].map((_, key) => (
+        {[1, 2].map((_, key) => (
           <Skeleton key={key} className="w-full h-10" />
         ))}
       </div>

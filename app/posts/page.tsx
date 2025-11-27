@@ -1,4 +1,4 @@
-import { ArrowLeft, Check, Eye, Plus, X } from "lucide-react";
+import { ArrowLeft, Check, Eye, Pencil, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -77,13 +77,19 @@ export default async function Posts() {
                   </TableCell>
                   <TableCell>
                     <div className="flex flex-row items-center gap-2">
-                      <Button size={"icon-sm"} variant={"ghost"} asChild>
+                      <Button size={"icon-sm"} variant={"outline"} asChild>
                         <Link href={`/posts/${post.id}`}>
                           <Eye />
                           <span className="sr-only">View</span>
                         </Link>
                       </Button>
-                      <EditPostForm id={String(post.id)} />
+                      <Button size={"icon-sm"} variant={"ghost"} asChild>
+                        <Link href={`/posts/edit/${post.id}`}>
+                          <Pencil />
+                          <span className="sr-only">Edit</span>
+                        </Link>
+                      </Button>
+                      {/* <EditPostForm id={String(post.id)} /> */}
                       <DeletePostForm id={String(post.id)} />
                     </div>
                   </TableCell>

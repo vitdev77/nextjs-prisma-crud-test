@@ -8,9 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowLeft, Check, Eye, Pen, X } from "lucide-react";
+import { ArrowLeft, Eye } from "lucide-react";
 import Link from "next/link";
-import { CreateUserForm, DeleteUserForm, EditUserForm } from "./_components";
+import {
+  CreateUserForm,
+  DeleteUserForm,
+  EditUserForm,
+} from "@/components/forms";
 import { getUsers } from "@/actions/user.actions";
 
 export default async function Users() {

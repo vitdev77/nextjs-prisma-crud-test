@@ -1,11 +1,11 @@
 import { getPostById } from "@/actions/post.actions";
+import { EditPostComponent } from "@/components/edit-post-component";
 import { Button } from "@/components/ui/button";
-import { ViewPostComponent } from "@/components/view-post-component";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export default async function PostPage(props: {
+export default async function EditPostPage(props: {
   params: Promise<{ id: string }>;
 }) {
   const params = await props.params;
@@ -20,12 +20,7 @@ export default async function PostPage(props: {
 
   return (
     <div className="min-h-screen flex flex-col gap-6 items-center justify-center">
-      <ViewPostComponent post={post} />
-      <Button variant={"link"} asChild>
-        <Link href={"/posts"}>
-          <ArrowLeft /> Back to Posts
-        </Link>
-      </Button>
+      <EditPostComponent />
     </div>
   );
 }
