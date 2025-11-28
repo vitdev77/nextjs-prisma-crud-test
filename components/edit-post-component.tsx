@@ -4,20 +4,14 @@ import { EditPostForm } from "@/components/forms";
 
 interface Props {
   post: PostWithRelations;
+  _onSubmit?: VoidFunction;
   className?: string;
 }
 
-export function EditPostComponent({ post, className }: Props) {
+export function EditPostComponent({ post, _onSubmit, className }: Props) {
   return (
     <div className={cn("space-y-2", className)}>
-      <div className="text-destructive text-lg font-medium">
-        EditPostComponent: #{post.id}
-      </div>
-      {/* <pre className="whitespace-pre font-mono text-xs text-muted-foreground bg-muted p-4 rounded-lg w-full">
-        {JSON.stringify(post, null, 2)}
-      </pre> */}
-      {/* <EditPostForm post={post} /> */}
-      <EditPostForm />
+      <EditPostForm post={post} _onSubmit={_onSubmit} />
     </div>
   );
 }

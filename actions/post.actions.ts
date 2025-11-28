@@ -2,7 +2,6 @@
 
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 // Get all posts
 export async function getPosts() {
@@ -19,14 +18,7 @@ export async function getPosts() {
     return posts;
   } catch (error) {
     console.error("Error fetching posts:", error);
-    // You can handle the error in various ways:
-    // - Return an empty array or a specific error object
-    // - Throw a custom error
-    // - Log the error to a monitoring service
     throw new Error("Failed to retrieve posts from the database.");
-  } finally {
-    // Optional: Disconnect Prisma Client after the operation
-    await prisma.$disconnect();
   }
 }
 
@@ -43,12 +35,9 @@ export async function getPostById({ postId }: { postId: string }) {
     });
 
     return singlePost;
-  } catch (err) {
-    console.error("Error fetching post:", err);
-    throw new Error("Failed to retrieve post from the database.");
-  } finally {
-    // Optional: Disconnect Prisma Client after the operation
-    await prisma.$disconnect();
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    throw new Error("Failed to retrieve single post from the database.");
   }
 }
 
@@ -73,28 +62,27 @@ export async function createPost({
   } catch (error) {
     console.log(error);
     return {
-      error: "SERVER ERROR",
+      error: "[CREATE]: SERVER ERROR",
     };
   }
 
   revalidatePath("/posts");
-  // redirect("/posts");
 }
 
 // Edit single post
 export async function editPost({
-  postId,
+  id,
   title,
   content,
 }: {
-  postId: string;
+  id: string;
   title: string;
   content: string;
 }) {
   try {
     await prisma.post.update({
       where: {
-        id: Number(postId),
+        id: Number(id),
       },
       data: {
         title,
@@ -104,7 +92,7 @@ export async function editPost({
   } catch (error) {
     console.log(error);
     return {
-      error: "SERVER ERROR",
+      error: "[EDIT]: SERVER ERROR",
     };
   }
 
@@ -112,17 +100,17 @@ export async function editPost({
 }
 
 // Delete single post
-export async function deletePost({ postId }: { postId: string }) {
+export async function deletePost({ id }: { id: string }) {
   try {
     await prisma.post.delete({
       where: {
-        id: Number(postId),
+        id: Number(id),
       },
     });
   } catch (error) {
     console.log(error);
     return {
-      error: "SERVER ERROR",
+      error: "[DELETE]: SERVER ERROR",
     };
   }
 

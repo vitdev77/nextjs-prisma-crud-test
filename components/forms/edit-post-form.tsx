@@ -15,30 +15,38 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { LoadingButton } from "@/components/loading-button";
 import { toast } from "sonner";
-import { createPost } from "@/actions/post.actions";
+import { editPost } from "@/actions/post.actions";
+import { PostWithRelations } from "@/@types/prisma";
 
 const editPostSchema = z.object({
   title: z.string().min(1, { message: "Title is required" }),
   content: z.string().min(1, { message: "Content is required" }),
-  authorId: z.string().nonempty("Please select an author"),
+  // author: z.string().min(1, { message: "Author is required" }),
+  id: z.string().min(1, { message: "Post ID is required" }),
 });
 
 type EditPostValues = z.infer<typeof editPostSchema>;
 
-export function EditPostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
+interface Props {
+  post: PostWithRelations;
+  _onSubmit?: VoidFunction;
+}
+
+export function EditPostForm({ post, _onSubmit }: Props) {
   const [error, setError] = React.useState<string | null>(null);
 
   const form = useForm<EditPostValues>({
     resolver: zodResolver(editPostSchema),
     defaultValues: {
-      title: "",
-      content: "",
-      authorId: "",
+      title: post.title,
+      content: post.content || "",
+      // author: post.author.name || undefined,
+      id: String(post.id),
     },
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    const res = await createPost(data);
+    const res = await editPost(data);
     if (res?.error) {
       toast.error(res.error);
     } else {
@@ -94,9 +102,9 @@ export function EditPostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
-            name="authorId"
+            name="author"
             render={({ field }) => {
               return (
                 <FormItem>
@@ -108,7 +116,23 @@ export function EditPostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
                 </FormItem>
               );
             }}
-          />
+          /> */}
+
+          {/* <FormField
+            control={form.control}
+            name="postId"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>PostID</FormLabel>
+                  <FormControl>
+                    <Input disabled={true} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          /> */}
 
           {error && (
             <div role="alert" className="text-destructive text-sm">

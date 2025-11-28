@@ -29,7 +29,7 @@ export const EditPostModal: React.FC<Props> = ({ post, className }) => {
           <DialogTitle>{post.title} - Edit</DialogTitle>
         </VisuallyHidden>
 
-        <EditPostComponent post={post} />
+        <EditPostComponent post={post} _onSubmit={onCloseModal} />
       </DialogContent>
     </Dialog>
   );

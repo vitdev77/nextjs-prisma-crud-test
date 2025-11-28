@@ -26,8 +26,7 @@ export function DeletePostForm({
   deleting?: boolean;
 }) {
   const handleDelete = async () => {
-    const postId = id;
-    const res = await deletePost({ postId });
+    const res = await deletePost({ id });
     if (res?.error) {
       toast.error(res.error);
     } else {
