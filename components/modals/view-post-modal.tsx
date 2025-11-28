@@ -26,7 +26,7 @@ export const ViewPostModal: React.FC<Props> = ({ post, className }) => {
         className={cn("sm:max-w-[425px]", className)}
       >
         <VisuallyHidden>
-          <DialogTitle>{post.title}</DialogTitle>
+          <DialogTitle>{post.title} - View</DialogTitle>
         </VisuallyHidden>
 
         <ViewPostComponent post={post} />

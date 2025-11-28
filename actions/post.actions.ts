@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 // Get all posts
 export async function getPosts() {
@@ -52,17 +53,15 @@ export async function getPostById({ postId }: { postId: string }) {
 }
 
 // Create new post
-interface CreatePostProps {
-  title: string;
-  content: string;
-  authorId: string;
-}
-
 export async function createPost({
   title,
   content,
   authorId,
-}: CreatePostProps) {
+}: {
+  title: string;
+  content: string;
+  authorId: string;
+}) {
   try {
     await prisma.post.create({
       data: {
@@ -79,15 +78,19 @@ export async function createPost({
   }
 
   revalidatePath("/posts");
+  // redirect("/posts");
 }
 
 // Edit single post
-interface editPostProps {
+export async function editPost({
+  postId,
+  title,
+  content,
+}: {
   postId: string;
   title: string;
   content: string;
-}
-export async function editPost({ postId, title, content }: editPostProps) {
+}) {
   try {
     await prisma.post.update({
       where: {

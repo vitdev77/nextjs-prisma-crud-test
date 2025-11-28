@@ -10,11 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
-import {
-  CreatePostForm,
-  DeletePostForm,
-  EditPostForm,
-} from "@/components/forms";
+import {DeletePostForm} from "@/components/forms";
 import { getPosts } from "@/actions/post.actions";
 
 export default async function Posts() {
@@ -25,7 +21,6 @@ export default async function Posts() {
       <div className="flex items-center justify-between gap-6 min-w-4xl mx-auto">
         <div className="flex flex-wrap items-center gap-4">
           <h1 className="text-4xl font-bold">Posts</h1>
-          <CreatePostForm />
           <Button asChild>
             <Link href={"/posts/new"}>
               <Plus /> New post

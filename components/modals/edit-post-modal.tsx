@@ -9,27 +9,27 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { EditPostComponent } from "@/components/edit-post-component";
 
 interface Props {
-  // post: PostWithRelations;
+  post: PostWithRelations;
   className?: string;
 }
 
-export const EditPostModal: React.FC<Props> = ({ className }) => {
+export const EditPostModal: React.FC<Props> = ({ post, className }) => {
   const router = useRouter();
 
   const onCloseModal = () => {
     router.back();
   };
   return (
-    <Dialog open={true} onOpenChange={onCloseModal}>
+    <Dialog open={Boolean(post)} onOpenChange={onCloseModal}>
       <DialogContent
         aria-describedby={undefined}
         className={cn("sm:max-w-[425px]", className)}
       >
         <VisuallyHidden>
-          <DialogTitle>Edit Post Modal</DialogTitle>
+          <DialogTitle>{post.title} - Edit</DialogTitle>
         </VisuallyHidden>
 
-        <EditPostComponent />
+        <EditPostComponent post={post} />
       </DialogContent>
     </Dialog>
   );

@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { ViewPostModal } from "@/components/modals/view-post-modal";
 import { getPostById } from "@/actions/post.actions";
+import { ViewPostModal } from "@/components/modals/view-post-modal";
 
-export default async function PostModalPage(props: {
+export default async function ViewPostModalPage(props: {
   params: Promise<{ id: string }>;
 }) {
   const params = await props.params;

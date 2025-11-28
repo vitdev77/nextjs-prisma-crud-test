@@ -36,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${robotoFlex.className} ${geistMono.variable} antialiased`}
       >
-        <NextTopLoader showSpinner={false} height={1} color="#171717" />
+        <NextTopLoader showSpinner={false} height={2} color="#171717" />
         {children}
         {modal}
         <Toaster position={"top-center"} richColors />

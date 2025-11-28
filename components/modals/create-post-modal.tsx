@@ -28,8 +28,7 @@ export const CreatePostModal: React.FC<Props> = ({ className }) => {
           <DialogTitle>Create New Post</DialogTitle>
         </VisuallyHidden>
 
-        <CreatePostComponent />
-        {/* <PostForm post={post} _onSubmit={onCloseModal} /> */}
+        <CreatePostComponent _onSubmit={onCloseModal} />
       </DialogContent>
     </Dialog>
   );

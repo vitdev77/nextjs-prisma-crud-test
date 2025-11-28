@@ -20,7 +20,13 @@ export default async function EditPostPage(props: {
 
   return (
     <div className="min-h-screen flex flex-col gap-6 items-center justify-center">
-      <EditPostComponent />
+      <EditPostComponent post={post} />
+
+      <Button variant={"link"} asChild>
+        <Link href={"/posts"}>
+          <ArrowLeft /> Back to Posts
+        </Link>
+      </Button>
     </div>
   );
 }

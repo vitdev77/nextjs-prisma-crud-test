@@ -21,6 +21,7 @@ export default async function PostPage(props: {
   return (
     <div className="min-h-screen flex flex-col gap-6 items-center justify-center">
       <ViewPostComponent post={post} />
+
       <Button variant={"link"} asChild>
         <Link href={"/posts"}>
           <ArrowLeft /> Back to Posts
