@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,7 +18,13 @@ import { cn } from "@/lib/utils";
 import { deletePost } from "@/actions/post.actions";
 import { toast } from "sonner";
 
-export function DeletePostForm({ id }: { id: string }) {
+export function DeletePostForm({
+  id,
+  deleting,
+}: {
+  id: string;
+  deleting?: boolean;
+}) {
   const handleDelete = async () => {
     const postId = id;
     const res = await deletePost({ postId });

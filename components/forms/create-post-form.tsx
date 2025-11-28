@@ -126,7 +126,6 @@ export function CreatePostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    // disabled={loading || allUsers.length === 0}
                     disabled={loading}
                     {...field}
                   >
@@ -165,7 +164,12 @@ export function CreatePostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
             </div>
           )}
 
-          <LoadingButton type="submit" className="w-full" loading={loading}>
+          <LoadingButton
+            type="submit"
+            className="w-full"
+            loading={loading}
+            disabled={users.length === 0}
+          >
             Submit
           </LoadingButton>
         </form>

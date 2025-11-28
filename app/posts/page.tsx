@@ -1,9 +1,8 @@
-import { ArrowLeft, Check, Eye, Home, Pencil, Plus, X } from "lucide-react";
+import { Check, Eye, Home, Pencil, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -14,6 +13,7 @@ import { DeletePostForm } from "@/components/forms";
 import { getPosts } from "@/actions/post.actions";
 import { ReturnButton } from "@/components/return-button";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 export default async function Posts() {
   const posts = await getPosts();
@@ -69,7 +69,10 @@ export default async function Posts() {
               </TableRow>
             ) : (
               posts.map((post) => (
-                <TableRow key={post.id}>
+                <TableRow
+                  key={post.id}
+                  // className={cn(deleting && "pointer-events-none opacity-20")}
+                >
                   <TableCell>{post.id}</TableCell>
                   <TableCell className="font-medium">{post.title}</TableCell>
                   <TableCell>{post.content}</TableCell>
@@ -95,7 +98,7 @@ export default async function Posts() {
                           <span className="sr-only">Edit</span>
                         </Link>
                       </Button>
-                      {/* <EditPostForm id={String(post.id)} /> */}
+                      {/* <DeletePostForm id={String(post.id)} deleting={deleting} /> */}
                       <DeletePostForm id={String(post.id)} />
                     </div>
                   </TableCell>

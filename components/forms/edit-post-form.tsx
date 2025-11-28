@@ -10,15 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -34,16 +25,8 @@ const editPostSchema = z.object({
 
 type EditPostValues = z.infer<typeof editPostSchema>;
 
-export function EditPostForm({
-  _onSubmit,
-  // users,
-}: {
-  _onSubmit?: VoidFunction;
-  // users: Promise<{ id: number; email: string; name: string | null }[]>;
-}) {
+export function EditPostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
   const [error, setError] = React.useState<string | null>(null);
-
-  // const allUsers = React.use(users);
 
   const form = useForm<EditPostValues>({
     resolver: zodResolver(editPostSchema),
@@ -118,31 +101,9 @@ export function EditPostForm({
               return (
                 <FormItem>
                   <FormLabel>Author</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    // disabled={loading || allUsers.length === 0}
-                    disabled={loading}
-                    {...field}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select an author" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Authors</SelectLabel>
-                        {/* {allUsers.map((user) => (
-                          <SelectItem key={user.id} value={String(user.id)}>
-                            {user.name} #{user.email}
-                          </SelectItem>
-                        ))} */}
-                        <SelectItem value="1">Alice</SelectItem>
-                        <SelectItem value="2">Bob</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <FormControl>
+                    <Input disabled={true} {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               );
