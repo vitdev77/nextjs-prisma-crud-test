@@ -8,7 +8,7 @@ export default function loading() {
           <Skeleton className="w-25 h-10" />
           <Skeleton className="w-27 h-9" />
         </div>
-        <Skeleton className="w-30 h-6" />
+        <Skeleton className="w-40 h-6" />
       </div>
 
       <div className="min-w-4xl mx-auto space-y-2">

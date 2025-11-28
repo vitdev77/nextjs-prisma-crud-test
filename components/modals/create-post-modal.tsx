@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { PostWithRelations } from "@/@types/prisma";
 import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
@@ -27,7 +26,6 @@ export const CreatePostModal: React.FC<Props> = ({ className }) => {
         <VisuallyHidden>
           <DialogTitle>Create New Post</DialogTitle>
         </VisuallyHidden>
-
         <CreatePostComponent _onSubmit={onCloseModal} />
       </DialogContent>
     </Dialog>

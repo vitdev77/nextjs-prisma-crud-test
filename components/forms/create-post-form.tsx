@@ -34,12 +34,16 @@ const newPostSchema = z.object({
 
 type NewPostValues = z.infer<typeof newPostSchema>;
 
-interface Props {
+export function CreatePostForm({
+  _onSubmit,
+  // users,
+}: {
   _onSubmit?: VoidFunction;
-}
-
-export function CreatePostForm({ _onSubmit }: Props) {
+  // users: Promise<{ id: number; email: string; name: string | null }[]>;
+}) {
   const [error, setError] = React.useState<string | null>(null);
+
+  // const allUsers = React.use(users);
 
   const form = useForm<NewPostValues>({
     resolver: zodResolver(newPostSchema),
@@ -118,6 +122,7 @@ export function CreatePostForm({ _onSubmit }: Props) {
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    // disabled={loading || allUsers.length === 0}
                     disabled={loading}
                     {...field}
                   >
@@ -129,6 +134,11 @@ export function CreatePostForm({ _onSubmit }: Props) {
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>Authors</SelectLabel>
+                        {/* {allUsers.map((user) => (
+                          <SelectItem key={user.id} value={String(user.id)}>
+                            {user.name} #{user.email}
+                          </SelectItem>
+                        ))} */}
                         <SelectItem value="1">Alice</SelectItem>
                         <SelectItem value="2">Bob</SelectItem>
                       </SelectGroup>

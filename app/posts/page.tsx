@@ -1,4 +1,4 @@
-import { ArrowLeft, Check, Eye, Pencil, Plus, X } from "lucide-react";
+import { ArrowLeft, Check, Eye, Home, Pencil, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -10,8 +10,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
-import {DeletePostForm} from "@/components/forms";
+import { DeletePostForm } from "@/components/forms";
 import { getPosts } from "@/actions/post.actions";
+import { ReturnButton } from "@/components/return-button";
+import { Separator } from "@/components/ui/separator";
 
 export default async function Posts() {
   const posts = await getPosts();
@@ -27,11 +29,20 @@ export default async function Posts() {
             </Link>
           </Button>
         </div>
-        <Button variant={"link"} asChild>
-          <Link href="/users">
-            <ArrowLeft /> Users page
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2 h-5">
+          <ReturnButton
+            btnVariant="link"
+            href="/users"
+            label="All Users Page"
+          />
+          <Separator orientation="vertical" />
+          <Button variant={"ghost"} size={"icon-sm"} asChild>
+            <Link href={"/"}>
+              <Home />
+              <span className="sr-only">Back to Home</span>
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <div className="min-w-4xl mx-auto">

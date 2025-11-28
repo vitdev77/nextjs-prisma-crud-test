@@ -8,7 +8,7 @@ export default function NewPostPage() {
       <ReturnButton
         btnVariant={"link"}
         href={"/posts"}
-        label="Back to Posts Page"
+        label="All Posts Page"
       />
       <Card>
         <CardContent>

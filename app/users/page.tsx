@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowLeft, Eye } from "lucide-react";
+import { Eye, Home } from "lucide-react";
 import Link from "next/link";
 import {
   CreateUserForm,
@@ -16,6 +16,8 @@ import {
   EditUserForm,
 } from "@/components/forms";
 import { getUsers } from "@/actions/user.actions";
+import { ReturnButton } from "@/components/return-button";
+import { Separator } from "@/components/ui/separator";
 
 export default async function Users() {
   const users = await getUsers();
@@ -27,11 +29,20 @@ export default async function Users() {
           <h1 className="text-4xl font-bold">Users</h1>
           <CreateUserForm />
         </div>
-        <Button variant={"link"} asChild>
-          <Link href="/posts">
-            <ArrowLeft /> Posts page
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2 h-5">
+          <ReturnButton
+            btnVariant="link"
+            href="/posts"
+            label="All Posts Page"
+          />
+          <Separator orientation="vertical" />
+          <Button variant={"ghost"} size={"icon-sm"} asChild>
+            <Link href={"/"}>
+              <Home />
+              <span className="sr-only">Back to Home</span>
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <div className="min-w-4xl mx-auto">

@@ -1,6 +1,8 @@
 import { getPostById } from "@/actions/post.actions";
 import { EditPostComponent } from "@/components/edit-post-component";
+import { ReturnButton } from "@/components/return-button";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -19,14 +21,17 @@ export default async function EditPostPage(props: {
   }
 
   return (
-    <div className="min-h-screen flex flex-col gap-6 items-center justify-center">
-      <EditPostComponent post={post} />
-
-      <Button variant={"link"} asChild>
-        <Link href={"/posts"}>
-          <ArrowLeft /> Back to Posts
-        </Link>
-      </Button>
+    <div className="bg-muted min-h-screen flex flex-col gap-6 items-center justify-center">
+      <ReturnButton
+        btnVariant={"link"}
+        href={"/posts"}
+        label="All Posts Page"
+      />
+      <Card>
+        <CardContent>
+          <EditPostComponent post={post} />
+        </CardContent>
+      </Card>
     </div>
   );
 }
