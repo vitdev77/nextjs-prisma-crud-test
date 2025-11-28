@@ -11,7 +11,8 @@
     "prisma:push_fr": "prisma db push --force-reset",
     "prisma:studio": "prisma studio",
     "prisma:seed": "prisma db seed",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "refresh-baseline-browser-mapping": "npm i --save-dev baseline-browser-mapping@latest"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -74,6 +75,7 @@
     "@types/pg": "^8.15.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "baseline-browser-mapping": "^2.8.32",
     "eslint": "^9",
     "eslint-config-next": "16.0.4",
     "eslint-config-prettier": "^10.1.8",

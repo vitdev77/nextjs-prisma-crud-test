@@ -25,6 +25,7 @@ import { z } from "zod";
 import { LoadingButton } from "@/components/loading-button";
 import { toast } from "sonner";
 import { createPost } from "@/actions/post.actions";
+import { getUsers } from "@/actions/user.actions";
 
 const newPostSchema = z.object({
   title: z.string().min(1, { message: "Title is required" }),
@@ -34,16 +35,19 @@ const newPostSchema = z.object({
 
 type NewPostValues = z.infer<typeof newPostSchema>;
 
-export function CreatePostForm({
-  _onSubmit,
-  // users,
-}: {
-  _onSubmit?: VoidFunction;
-  // users: Promise<{ id: number; email: string; name: string | null }[]>;
-}) {
+export function CreatePostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
+  const [users, setUsers] = React.useState<
+    { id: number; email: string; name: string | null }[]
+  >([]);
   const [error, setError] = React.useState<string | null>(null);
 
-  // const allUsers = React.use(users);
+  React.useEffect(() => {
+    async function getAllUsers() {
+      const fetchUsersData = await getUsers();
+      setUsers(fetchUsersData);
+    }
+    getAllUsers();
+  }, [getUsers]);
 
   const form = useForm<NewPostValues>({
     resolver: zodResolver(newPostSchema),
@@ -134,13 +138,18 @@ export function CreatePostForm({
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>Authors</SelectLabel>
-                        {/* {allUsers.map((user) => (
-                          <SelectItem key={user.id} value={String(user.id)}>
-                            {user.name} #{user.email}
+                        {users.map((user) => (
+                          <SelectItem
+                            className="flex justify-between gap-2"
+                            key={user.id}
+                            value={String(user.id)}
+                          >
+                            {user.name}{" "}
+                            <span className="text-muted-foreground">
+                              {user.email}
+                            </span>
                           </SelectItem>
-                        ))} */}
-                        <SelectItem value="1">Alice</SelectItem>
-                        <SelectItem value="2">Bob</SelectItem>
+                        ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>

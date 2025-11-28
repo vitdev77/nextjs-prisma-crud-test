@@ -41,6 +41,19 @@ const userData: Prisma.UserCreateInput[] = [
       ],
     },
   },
+  {
+    name: "John",
+    email: "john@prisma.io",
+    posts: {
+      create: [
+        {
+          title: "Prisma CRUD",
+          content: "https://www.prisma.io/docs/orm/prisma-client/queries/crud",
+          published: true,
+        },
+      ],
+    },
+  },
 ];
 
 export async function main() {
