@@ -15,23 +15,34 @@ export async function getUsers() {
     return users;
   } catch (error) {
     console.error("Error fetching users:", error);
-    // You can handle the error in various ways:
-    // - Return an empty array or a specific error object
-    // - Throw a custom error
-    // - Log the error to a monitoring service
     throw new Error("Failed to retrieve users from the database.");
-  } finally {
-    await prisma.$disconnect();
+  }
+}
+
+// Get single user
+export async function getUserById({ userId }: { userId: string }) {
+  try {
+    const singleUser = await prisma.user.findFirst({
+      where: {
+        id: Number(userId),
+      },
+    });
+
+    return singleUser;
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    throw new Error("Failed to retrieve single user from the database.");
   }
 }
 
 // Create new user
-interface CreateUserProps {
+export async function createUser({
+  name,
+  email,
+}: {
   name: string;
   email: string;
-}
-
-export async function createUser({ name, email }: CreateUserProps) {
+}) {
   try {
     await prisma.user.create({
       data: {
@@ -42,7 +53,37 @@ export async function createUser({ name, email }: CreateUserProps) {
   } catch (error) {
     console.log(error);
     return {
-      error: "SERVER ERROR",
+      error: "[USER_CREATE]: SERVER ERROR",
+    };
+  }
+
+  revalidatePath("/users");
+}
+
+// Edit single user
+export async function editUser({
+  id,
+  name,
+  email,
+}: {
+  id: string;
+  name: string;
+  email: string;
+}) {
+  try {
+    await prisma.user.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        name,
+        email,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return {
+      error: "[USER_EDIT]: SERVER ERROR",
     };
   }
 
@@ -60,7 +101,7 @@ export async function deleteUser({ userId }: { userId: string }) {
   } catch (error) {
     console.log(error);
     return {
-      error: "SERVER ERROR",
+      error: "[USER_DELETE]: SERVER ERROR",
     };
   }
 

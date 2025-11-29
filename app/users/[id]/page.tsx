@@ -1,19 +1,19 @@
-import { getPostById } from "@/actions/post.actions";
+import { getUserById } from "@/actions/user.actions";
 import { ReturnButton } from "@/components/return-button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ViewPostComponent } from "@/components/view-post-component";
+import { ViewUserComponent } from "@/components/view-user-component";
 import { notFound } from "next/navigation";
 
-export default async function PostPage(props: {
+export default async function UserPage(props: {
   params: Promise<{ id: string }>;
 }) {
   const params = await props.params;
 
   const { id } = params;
 
-  const post = await getPostById({ postId: id });
+  const user = await getUserById({ userId: id });
 
-  if (!post) {
+  if (!user) {
     notFound();
   }
 
@@ -21,12 +21,12 @@ export default async function PostPage(props: {
     <div className="bg-muted min-h-screen flex flex-col gap-6 items-center justify-center">
       <ReturnButton
         btnVariant={"link"}
-        href={"/posts"}
-        label="All Posts Page"
+        href={"/users"}
+        label="All Users Page"
       />
-      <Card>
+      <Card className="min-w-xs">
         <CardContent>
-          <ViewPostComponent post={post} />
+          <ViewUserComponent user={user} />
         </CardContent>
       </Card>
     </div>

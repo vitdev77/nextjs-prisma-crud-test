@@ -41,6 +41,25 @@ export async function getPostById({ postId }: { postId: string }) {
   }
 }
 
+// Get posts list by User ID
+export async function getPostsByUserId({ userId }: { userId: string }) {
+  try {
+    const postsByUserId = await prisma.post.findMany({
+      where: {
+        authorId: Number(userId),
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return postsByUserId;
+  } catch (error) {
+    console.error("Error fetching posts by user:", error);
+    throw new Error("Failed to retrieve posts by user from the database.");
+  }
+}
+
 // Create new post
 export async function createPost({
   title,
@@ -62,7 +81,7 @@ export async function createPost({
   } catch (error) {
     console.log(error);
     return {
-      error: "[CREATE]: SERVER ERROR",
+      error: "[POST_CREATE]: SERVER ERROR",
     };
   }
 
@@ -92,7 +111,7 @@ export async function editPost({
   } catch (error) {
     console.log(error);
     return {
-      error: "[EDIT]: SERVER ERROR",
+      error: "[POST_EDIT]: SERVER ERROR",
     };
   }
 
@@ -110,7 +129,7 @@ export async function deletePost({ id }: { id: string }) {
   } catch (error) {
     console.log(error);
     return {
-      error: "[DELETE]: SERVER ERROR",
+      error: "[POST_DELETE]: SERVER ERROR",
     };
   }
 

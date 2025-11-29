@@ -11,5 +11,6 @@ export default async function EditPostModalPage(props: {
   const post = await getPostById({ postId: id });
 
   if (!post) return notFound();
+
   return <EditPostModal post={post} />;
 }

@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Eye, Home } from "lucide-react";
+import { Eye, Home, Plus, RotateCcw } from "lucide-react";
 import Link from "next/link";
 import {
   CreateUserForm,
@@ -27,7 +27,11 @@ export default async function Users() {
       <div className="flex items-center justify-between gap-6 min-w-4xl mx-auto">
         <div className="flex flex-wrap items-center gap-4">
           <h1 className="text-4xl font-bold">Users</h1>
-          <CreateUserForm />
+          <Button asChild>
+            <Link href={"/users/new"}>
+              <Plus /> New user
+            </Link>
+          </Button>
         </div>
         <div className="flex items-center gap-2 h-5">
           <ReturnButton

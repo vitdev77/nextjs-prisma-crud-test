@@ -49,7 +49,7 @@ export function CreatePostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
       setUsers(fetchUsersData);
     }
     getAllUsers();
-  }, [getUsers]);
+  }, []);
 
   const form = useForm<NewPostValues>({
     resolver: zodResolver(newPostSchema),
