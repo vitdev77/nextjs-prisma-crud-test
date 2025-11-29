@@ -26,6 +26,8 @@ import { LoadingButton } from "@/components/loading-button";
 import { toast } from "sonner";
 import { createPost } from "@/actions/post.actions";
 import { getUsers } from "@/actions/user.actions";
+import { UsersCombobox } from "@/components/users-combobox";
+import { cn } from "@/lib/utils";
 
 const newPostSchema = z.object({
   title: z.string().min(1, { message: "Title is required" }),
@@ -130,7 +132,10 @@ export function CreatePostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
                     {...field}
                   >
                     <FormControl>
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger
+                        className="w-full"
+                        disabled={loading || users.length === 0}
+                      >
                         <SelectValue placeholder="Select an author" />
                       </SelectTrigger>
                     </FormControl>
@@ -157,6 +162,9 @@ export function CreatePostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
               );
             }}
           />
+
+          {/* TODO: Need to work later */}
+          {/* <UsersCombobox isPending={users.length === 0} /> */}
 
           {error && (
             <div role="alert" className="text-destructive text-sm">

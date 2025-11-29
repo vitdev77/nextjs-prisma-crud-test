@@ -50,7 +50,7 @@ export function EditPostForm({ post, _onSubmit }: Props) {
     if (res?.error) {
       toast.error(res.error);
     } else {
-      toast.success("Post data successfully updated");
+      toast.success("Post successfully updated");
       _onSubmit?.();
     }
   });
