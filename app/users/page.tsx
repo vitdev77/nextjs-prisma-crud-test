@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Eye, Home, Plus, RotateCcw } from "lucide-react";
+import { Eye, Home, Pencil, Plus, RotateCcw } from "lucide-react";
 import Link from "next/link";
 import {
   CreateUserForm,
@@ -87,7 +87,12 @@ export default async function Users() {
                           <span className="sr-only">View</span>
                         </Link>
                       </Button>
-                      <EditUserForm id={String(user.id)} />
+                      <Button size={"icon-sm"} variant={"ghost"} asChild>
+                        <Link href={`/users/edit/${user.id}`}>
+                          <Pencil />
+                          <span className="sr-only">Edit</span>
+                        </Link>
+                      </Button>
                       <DeleteUserForm id={String(user.id)} />
                     </div>
                   </TableCell>

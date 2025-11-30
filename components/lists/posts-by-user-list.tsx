@@ -49,7 +49,7 @@ export function PostsByUserList({ userId }: { userId: string }) {
           )}
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">ID</TableHead>
+              <TableHead>ID</TableHead>
               <TableHead>Title</TableHead>
               <TableHead>Content</TableHead>
             </TableRow>
@@ -67,8 +67,8 @@ export function PostsByUserList({ userId }: { userId: string }) {
             ) : (
               posts.map((post) => (
                 <TableRow key={post.id}>
-                  <TableCell className="font-medium">{post.id}</TableCell>
-                  <TableCell>
+                  <TableCell>{post.id}</TableCell>
+                  <TableCell className="font-medium">
                     <Link
                       href={`/posts/edit/${post.id}`}
                       target="_blank"

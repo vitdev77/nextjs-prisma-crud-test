@@ -51,6 +51,10 @@ const userData: Prisma.UserCreateInput[] = [
           content: "https://www.prisma.io/docs/orm/prisma-client/queries/crud",
           published: true,
         },
+        {
+          title: "Design Your Perfect shadcn/ui Theme",
+          content: "https://tweakcn.com/",
+        },
       ],
     },
   },

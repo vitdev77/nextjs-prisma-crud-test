@@ -59,7 +59,7 @@ export function EditUserForm({ user, _onSubmit }: Props) {
     <div className="flex flex-col gap-6">
       <div className="space-y-2">
         <h2 className="text-lg md:text-xl leading-none font-semibold">
-          Edit post
+          Edit user
         </h2>
         <p className="text-xs md:text-sm text-muted-foreground">
           Fill all form fields. Click button below when you&apos;re done.
