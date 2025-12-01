@@ -12,7 +12,7 @@ export function ViewUserComponent({ user, className }: Props) {
   return (
     <div className={cn("space-y-2", className)}>
       <h2 className="text-2xl font-bold">{user.name}</h2>
-      <p className="text-muted-foreground">by {user.email}</p>
+      <p className="text-muted-foreground">{user.email}</p>
       <PostsByUserList userId={String(user.id)} />
       <UserPostsProvider
         userId={String(user.id)}

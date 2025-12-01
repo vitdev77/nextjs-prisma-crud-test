@@ -61,7 +61,7 @@ export function PostsByUserList({ userId }: { userId: string }) {
                   colSpan={3}
                   className="text-center text-muted-foreground"
                 >
-                  no posts found
+                  no post found
                 </TableCell>
               </TableRow>
             ) : (
