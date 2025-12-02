@@ -8,13 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Eye, Home, Pencil, Plus, RotateCcw } from "lucide-react";
+import { Eye, Home, Pencil, Plus } from "lucide-react";
 import Link from "next/link";
-import {
-  CreateUserForm,
-  DeleteUserForm,
-  EditUserForm,
-} from "@/components/forms";
+import { DeleteUserForm } from "@/components/forms";
 import { getUsers } from "@/actions/user.actions";
 import { ReturnButton } from "@/components/return-button";
 import { Separator } from "@/components/ui/separator";
@@ -57,7 +53,9 @@ export default async function Users() {
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Created at</TableHead>
-              <TableHead></TableHead>
+              <TableHead className="text-muted-foreground text-right">
+                Actions
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -67,7 +65,7 @@ export default async function Users() {
                   colSpan={5}
                   className="text-center text-muted-foreground"
                 >
-                  no users found
+                  no user found
                 </TableCell>
               </TableRow>
             ) : (
@@ -80,7 +78,7 @@ export default async function Users() {
                     {String(user.createdAt)}
                   </TableCell>
                   <TableCell>
-                    <div className="flex flex-row items-center gap-2">
+                    <div className="flex flex-row items-center justify-end gap-2">
                       <Button size={"icon-sm"} variant={"ghost"} asChild>
                         <Link href={`/users/${user.id}`}>
                           <Eye />

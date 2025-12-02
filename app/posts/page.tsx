@@ -13,7 +13,6 @@ import { DeletePostForm } from "@/components/forms";
 import { getPosts } from "@/actions/post.actions";
 import { ReturnButton } from "@/components/return-button";
 import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
 
 export default async function Posts() {
   const posts = await getPosts();
@@ -54,7 +53,9 @@ export default async function Posts() {
               <TableHead>Content</TableHead>
               <TableHead>Author</TableHead>
               <TableHead>Published</TableHead>
-              <TableHead></TableHead>
+              <TableHead className="text-muted-foreground text-right">
+                Actions
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -64,7 +65,7 @@ export default async function Posts() {
                   colSpan={6}
                   className="text-center text-muted-foreground"
                 >
-                  no posts found
+                  no post found
                 </TableCell>
               </TableRow>
             ) : (
@@ -85,7 +86,7 @@ export default async function Posts() {
                     )}
                   </TableCell>
                   <TableCell>
-                    <div className="flex flex-row items-center gap-2">
+                    <div className="flex flex-row items-center justify-end gap-2">
                       <Button size={"icon-sm"} variant={"outline"} asChild>
                         <Link href={`/posts/${post.id}`}>
                           <Eye />

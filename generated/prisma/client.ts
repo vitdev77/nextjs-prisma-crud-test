@@ -64,3 +64,8 @@ export type Series = Prisma.SeriesModel
  * 
  */
 export type Product = Prisma.ProductModel
+/**
+ * Model ProductColor
+ * 
+ */
+export type ProductColor = Prisma.ProductColorModel

@@ -6,11 +6,7 @@ import { revalidatePath } from "next/cache";
 // Get all users
 export async function getUsers() {
   try {
-    const users = await prisma.user.findMany({
-      orderBy: {
-        name: "desc",
-      },
-    });
+    const users = await prisma.user.findMany({});
 
     return users;
   } catch (error) {

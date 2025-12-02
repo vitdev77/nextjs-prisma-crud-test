@@ -5,3 +5,5 @@ export { EditPostForm } from "./edit-post-form";
 export { CreateUserForm } from "./create-user-form";
 export { DeleteUserForm } from "./delete-user-form";
 export { EditUserForm } from "./edit-user-form";
+
+export { DeleteBrandForm } from "./delete-brand-form";

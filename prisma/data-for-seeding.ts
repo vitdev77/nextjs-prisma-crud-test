@@ -14,3 +14,11 @@ export const series = [
   { name: "BCD335", brandId: 1 }, // 5
   { name: "BCD375", brandId: 1 }, // 6
 ];
+
+export const productColors = [
+  { name: "White" }, // 1
+  { name: "Black" }, // 2
+  { name: "Beige" }, // 3
+  { name: "Inox" }, // 4
+  { name: "Basalt Gray" }, // 5
+];

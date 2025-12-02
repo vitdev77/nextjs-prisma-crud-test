@@ -8,7 +8,8 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
   email String  @unique
   name  String?
 
@@ -21,7 +22,8 @@ model User {
 }
 
 model Post {
-  id        Int     @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
   title     String
   content   String?
   published Boolean @default(false)
@@ -36,9 +38,11 @@ model Post {
 }
 
 model Brand {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  imageUrl  String?
+  id Int @id @default(autoincrement())
+
+  name     String  @unique
+  imageUrl String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -48,9 +52,11 @@ model Brand {
 }
 
 model Series {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  brandId   Int
+  id Int @id @default(autoincrement())
+
+  name    String @unique
+  brandId Int
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -62,15 +68,31 @@ model Series {
 }
 
 model Product {
-  id             Int      @id @default(autoincrement())
-  name           String   @unique
+  id Int @id @default(autoincrement())
+
+  name           String  @unique
   imageUrl       String?
   seriesId       Int
   productColorId Int
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   series Series @relation(fields: [seriesId], references: [id])
 
   @@map("products")
+}
+
+model ProductColor {
+  id Int @id @default(autoincrement())
+
+  name String
+
+  createdAt DateTime @default(now())
+  updatadAt DateTime @updatedAt
+
+  // TODO: ????????
+  // products Product[]
+
+  @@map("product_colors")
 }

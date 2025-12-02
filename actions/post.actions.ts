@@ -10,9 +10,6 @@ export async function getPosts() {
       include: {
         author: true,
       },
-      orderBy: {
-        createdAt: "desc",
-      },
     });
 
     return posts;

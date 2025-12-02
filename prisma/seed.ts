@@ -1,69 +1,57 @@
-import { PrismaClient, Prisma } from "@/generated/prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
-import "dotenv/config";
+import prisma from "@/lib/prisma";
+import { brands, productColors, series } from "./data-for-seeding";
 
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-});
+async function up() {
+  // adding brands
+  await prisma.brand.createMany({
+    data: brands,
+  });
 
-const prisma = new PrismaClient({
-  adapter,
-});
+  // adding series
+  await prisma.series.createMany({
+    data: series,
+  });
 
-const userData: Prisma.UserCreateInput[] = [
-  {
-    name: "Alice",
-    email: "alice@prisma.io",
-    posts: {
-      create: [
-        {
-          title: "Join the Prisma Discord",
-          content: "https://pris.ly/discord",
-          published: true,
-        },
-        {
-          title: "Prisma on YouTube",
-          content: "https://pris.ly/youtube",
-        },
-      ],
-    },
-  },
-  {
-    name: "Bob",
-    email: "bob@prisma.io",
-    posts: {
-      create: [
-        {
-          title: "Follow Prisma on Twitter",
-          content: "https://www.twitter.com/prisma",
-          published: true,
-        },
-      ],
-    },
-  },
-  {
-    name: "John",
-    email: "john@prisma.io",
-    posts: {
-      create: [
-        {
-          title: "Prisma CRUD",
-          content: "https://www.prisma.io/docs/orm/prisma-client/queries/crud",
-          published: true,
-        },
-        {
-          title: "Design Your Perfect shadcn/ui Theme",
-          content: "https://tweakcn.com/",
-        },
-      ],
-    },
-  },
-];
+  // adding products
+  // await prisma.product.createMany({
+  //   data: products,
+  // });
 
-export async function main() {
-  for (const u of userData) {
-    await prisma.user.create({ data: u });
+  // adding product colors
+  await prisma.productColor.createMany({
+    data: productColors,
+  });
+}
+
+async function down() {
+  // clear user tables
+  // await prisma.$executeRaw`TRUNCATE TABLE "accounts" RESTART IDENTITY CASCADE`;
+  // await prisma.$executeRaw`TRUNCATE TABLE "sessions" RESTART IDENTITY CASCADE`;
+  // await prisma.$executeRaw`TRUNCATE TABLE "users" RESTART IDENTITY CASCADE`;
+  // await prisma.$executeRaw`TRUNCATE TABLE "verifications" RESTART IDENTITY CASCADE`;
+
+  //clear product tables
+  await prisma.$executeRaw`TRUNCATE TABLE "brands" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "series" RESTART IDENTITY CASCADE`;
+  // await prisma.$executeRaw`TRUNCATE TABLE "products" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "product_colors" RESTART IDENTITY CASCADE`;
+}
+
+async function main() {
+  try {
+    await down();
+    await up();
+  } catch (e) {
+    console.error(e);
   }
 }
 
-main();
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    prisma.$disconnect();
+    process.exit(1);
+  });

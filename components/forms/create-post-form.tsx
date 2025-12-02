@@ -93,7 +93,11 @@ export function CreatePostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="Title" disabled={loading} {...field} />
+                  <Input
+                    placeholder="Title"
+                    disabled={loading || users.length === 0}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -109,7 +113,7 @@ export function CreatePostForm({ _onSubmit }: { _onSubmit?: VoidFunction }) {
                 <FormControl>
                   <Input
                     placeholder="Content here..."
-                    disabled={loading}
+                    disabled={loading || users.length === 0}
                     {...field}
                   />
                 </FormControl>
