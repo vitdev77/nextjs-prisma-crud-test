@@ -34,3 +34,43 @@ model Post {
 
   @@map("posts")
 }
+
+model Brand {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  series Series[]
+
+  @@map("brands")
+}
+
+model Series {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  brandId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  brand Brand @relation(fields: [brandId], references: [id])
+
+  products Product[]
+
+  @@map("series")
+}
+
+model Product {
+  id             Int      @id @default(autoincrement())
+  name           String   @unique
+  imageUrl       String?
+  seriesId       Int
+  productColorId Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  series Series @relation(fields: [seriesId], references: [id])
+
+  @@map("products")
+}

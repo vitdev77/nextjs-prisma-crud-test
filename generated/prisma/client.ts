@@ -49,3 +49,18 @@ export type User = Prisma.UserModel
  * 
  */
 export type Post = Prisma.PostModel
+/**
+ * Model Brand
+ * 
+ */
+export type Brand = Prisma.BrandModel
+/**
+ * Model Series
+ * 
+ */
+export type Series = Prisma.SeriesModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel
