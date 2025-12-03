@@ -953,9 +953,9 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 
 export const ProductColorScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   createdAt: 'createdAt',
-  updatadAt: 'updatadAt',
-  name: 'name'
+  updatadAt: 'updatadAt'
 } as const
 
 export type ProductColorScalarFieldEnum = (typeof ProductColorScalarFieldEnum)[keyof typeof ProductColorScalarFieldEnum]

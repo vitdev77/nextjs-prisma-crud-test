@@ -36,23 +36,23 @@ export type ProductColorSumAggregateOutputType = {
 
 export type ProductColorMinAggregateOutputType = {
   id: number | null
+  name: string | null
   createdAt: Date | null
   updatadAt: Date | null
-  name: string | null
 }
 
 export type ProductColorMaxAggregateOutputType = {
   id: number | null
+  name: string | null
   createdAt: Date | null
   updatadAt: Date | null
-  name: string | null
 }
 
 export type ProductColorCountAggregateOutputType = {
   id: number
+  name: number
   createdAt: number
   updatadAt: number
-  name: number
   _all: number
 }
 
@@ -67,23 +67,23 @@ export type ProductColorSumAggregateInputType = {
 
 export type ProductColorMinAggregateInputType = {
   id?: true
+  name?: true
   createdAt?: true
   updatadAt?: true
-  name?: true
 }
 
 export type ProductColorMaxAggregateInputType = {
   id?: true
+  name?: true
   createdAt?: true
   updatadAt?: true
-  name?: true
 }
 
 export type ProductColorCountAggregateInputType = {
   id?: true
+  name?: true
   createdAt?: true
   updatadAt?: true
-  name?: true
   _all?: true
 }
 
@@ -175,9 +175,9 @@ export type ProductColorGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 
 export type ProductColorGroupByOutputType = {
   id: number
+  name: string
   createdAt: Date
   updatadAt: Date
-  name: string
   _count: ProductColorCountAggregateOutputType | null
   _avg: ProductColorAvgAggregateOutputType | null
   _sum: ProductColorSumAggregateOutputType | null
@@ -205,16 +205,16 @@ export type ProductColorWhereInput = {
   OR?: Prisma.ProductColorWhereInput[]
   NOT?: Prisma.ProductColorWhereInput | Prisma.ProductColorWhereInput[]
   id?: Prisma.IntFilter<"ProductColor"> | number
+  name?: Prisma.StringFilter<"ProductColor"> | string
   createdAt?: Prisma.DateTimeFilter<"ProductColor"> | Date | string
   updatadAt?: Prisma.DateTimeFilter<"ProductColor"> | Date | string
-  name?: Prisma.StringFilter<"ProductColor"> | string
 }
 
 export type ProductColorOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatadAt?: Prisma.SortOrder
-  name?: Prisma.SortOrder
 }
 
 export type ProductColorWhereUniqueInput = Prisma.AtLeast<{
@@ -222,16 +222,16 @@ export type ProductColorWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ProductColorWhereInput | Prisma.ProductColorWhereInput[]
   OR?: Prisma.ProductColorWhereInput[]
   NOT?: Prisma.ProductColorWhereInput | Prisma.ProductColorWhereInput[]
+  name?: Prisma.StringFilter<"ProductColor"> | string
   createdAt?: Prisma.DateTimeFilter<"ProductColor"> | Date | string
   updatadAt?: Prisma.DateTimeFilter<"ProductColor"> | Date | string
-  name?: Prisma.StringFilter<"ProductColor"> | string
 }, "id">
 
 export type ProductColorOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatadAt?: Prisma.SortOrder
-  name?: Prisma.SortOrder
   _count?: Prisma.ProductColorCountOrderByAggregateInput
   _avg?: Prisma.ProductColorAvgOrderByAggregateInput
   _max?: Prisma.ProductColorMaxOrderByAggregateInput
@@ -244,62 +244,62 @@ export type ProductColorScalarWhereWithAggregatesInput = {
   OR?: Prisma.ProductColorScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ProductColorScalarWhereWithAggregatesInput | Prisma.ProductColorScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"ProductColor"> | number
+  name?: Prisma.StringWithAggregatesFilter<"ProductColor"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ProductColor"> | Date | string
   updatadAt?: Prisma.DateTimeWithAggregatesFilter<"ProductColor"> | Date | string
-  name?: Prisma.StringWithAggregatesFilter<"ProductColor"> | string
 }
 
 export type ProductColorCreateInput = {
+  name: string
   createdAt?: Date | string
   updatadAt?: Date | string
-  name: string
 }
 
 export type ProductColorUncheckedCreateInput = {
   id?: number
+  name: string
   createdAt?: Date | string
   updatadAt?: Date | string
-  name: string
 }
 
 export type ProductColorUpdateInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatadAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductColorUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatadAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductColorCreateManyInput = {
   id?: number
+  name: string
   createdAt?: Date | string
   updatadAt?: Date | string
-  name: string
 }
 
 export type ProductColorUpdateManyMutationInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatadAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductColorUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatadAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductColorCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatadAt?: Prisma.SortOrder
-  name?: Prisma.SortOrder
 }
 
 export type ProductColorAvgOrderByAggregateInput = {
@@ -308,16 +308,16 @@ export type ProductColorAvgOrderByAggregateInput = {
 
 export type ProductColorMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatadAt?: Prisma.SortOrder
-  name?: Prisma.SortOrder
 }
 
 export type ProductColorMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatadAt?: Prisma.SortOrder
-  name?: Prisma.SortOrder
 }
 
 export type ProductColorSumOrderByAggregateInput = {
@@ -328,42 +328,42 @@ export type ProductColorSumOrderByAggregateInput = {
 
 export type ProductColorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  name?: boolean
   createdAt?: boolean
   updatadAt?: boolean
-  name?: boolean
 }, ExtArgs["result"]["productColor"]>
 
 export type ProductColorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  name?: boolean
   createdAt?: boolean
   updatadAt?: boolean
-  name?: boolean
 }, ExtArgs["result"]["productColor"]>
 
 export type ProductColorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  name?: boolean
   createdAt?: boolean
   updatadAt?: boolean
-  name?: boolean
 }, ExtArgs["result"]["productColor"]>
 
 export type ProductColorSelectScalar = {
   id?: boolean
+  name?: boolean
   createdAt?: boolean
   updatadAt?: boolean
-  name?: boolean
 }
 
-export type ProductColorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatadAt" | "name", ExtArgs["result"]["productColor"]>
+export type ProductColorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatadAt", ExtArgs["result"]["productColor"]>
 
 export type $ProductColorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProductColor"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    name: string
     createdAt: Date
     updatadAt: Date
-    name: string
   }, ExtArgs["result"]["productColor"]>
   composites: {}
 }
@@ -788,9 +788,9 @@ export interface Prisma__ProductColorClient<T, Null = never, ExtArgs extends run
  */
 export interface ProductColorFieldRefs {
   readonly id: Prisma.FieldRef<"ProductColor", 'Int'>
+  readonly name: Prisma.FieldRef<"ProductColor", 'String'>
   readonly createdAt: Prisma.FieldRef<"ProductColor", 'DateTime'>
   readonly updatadAt: Prisma.FieldRef<"ProductColor", 'DateTime'>
-  readonly name: Prisma.FieldRef<"ProductColor", 'String'>
 }
     
 
