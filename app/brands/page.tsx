@@ -32,8 +32,8 @@ export default async function Brands() {
         <div className="flex items-center gap-2 h-5">
           <ReturnButton
             btnVariant="link"
-            href="/users"
-            label="All Users Page"
+            href="/series"
+            label="All Series Page"
           />
           <Separator orientation="vertical" />
           <Button variant={"ghost"} size={"icon-sm"} asChild>
@@ -51,6 +51,7 @@ export default async function Brands() {
             <TableRow>
               <TableHead className="w-[100px]">Brand ID</TableHead>
               <TableHead>Name</TableHead>
+              <TableHead>Image Path</TableHead>
               <TableHead>Created at</TableHead>
               <TableHead className="text-muted-foreground text-right">
                 Actions
@@ -61,7 +62,7 @@ export default async function Brands() {
             {brands.length === 0 ? (
               <TableRow>
                 <TableCell
-                  colSpan={4}
+                  colSpan={5}
                   className="text-center text-muted-foreground"
                 >
                   no brand found
@@ -72,8 +73,17 @@ export default async function Brands() {
                 <TableRow key={brand.id}>
                   <TableCell>{brand.id}</TableCell>
                   <TableCell className="font-medium">{brand.name}</TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {String(brand.createdAt)}
+                  <TableCell>
+                    {brand.brandImg === null ? (
+                      <span className="text-muted-foreground/50">
+                        no image added
+                      </span>
+                    ) : (
+                      `/brands/${brand.brandImg}`
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {String(brand.createdAt.toLocaleDateString())}
                   </TableCell>
                   <TableCell>
                     <div className="flex flex-row items-center justify-end gap-2">

@@ -75,7 +75,7 @@ export default async function Users() {
                   <TableCell className="font-medium">{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell className="text-muted-foreground">
-                    {String(user.createdAt)}
+                    {String(user.createdAt.toLocaleDateString())}
                   </TableCell>
                   <TableCell>
                     <div className="flex flex-row items-center justify-end gap-2">

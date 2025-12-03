@@ -102,7 +102,7 @@ export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof Post
 export const BrandScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  imageUrl: 'imageUrl',
+  brandImg: 'brandImg',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -124,7 +124,7 @@ export type SeriesScalarFieldEnum = (typeof SeriesScalarFieldEnum)[keyof typeof 
 export const ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  imageUrl: 'imageUrl',
+  productImg: 'productImg',
   seriesId: 'seriesId',
   productColorId: 'productColorId',
   createdAt: 'createdAt',

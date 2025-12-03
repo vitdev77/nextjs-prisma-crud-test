@@ -52,7 +52,7 @@ export default async function Posts() {
               <TableHead>Title</TableHead>
               <TableHead>Content</TableHead>
               <TableHead>Author</TableHead>
-              <TableHead>Published</TableHead>
+              <TableHead>Is Published</TableHead>
               <TableHead className="text-muted-foreground text-right">
                 Actions
               </TableHead>

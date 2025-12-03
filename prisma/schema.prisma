@@ -41,7 +41,7 @@ model Brand {
   id Int @id @default(autoincrement())
 
   name     String  @unique
-  imageUrl String?
+  brandImg String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -71,7 +71,7 @@ model Product {
   id Int @id @default(autoincrement())
 
   name           String  @unique
-  imageUrl       String?
+  productImg     String?
   seriesId       Int
   productColorId Int
 

@@ -1,9 +1,9 @@
 export const brands = [
-  { name: "Midea", imageUrl: "/brands/midea.png" }, // 1
-  { name: "General Electronics", imageUrl: "/brands/general-electronics.webp" }, // 2
-  { name: "DEXP", imageUrl: "/brands/dexp.png" }, // 3
-  { name: "Körting", imageUrl: "/brands/koerting.svg" }, // 4
-  { name: "Schaub Lorenz", imageUrl: "/brands/schaub-lorenz.png" }, // 5
+  { name: "Midea", brandImg: "midea.png" }, // 1
+  { name: "General Electronics", brandImg: "general-electronics.webp" }, // 2
+  { name: "DEXP", brandImg: "dexp.png" }, // 3
+  { name: "Körting", brandImg: "koerting.svg" }, // 4
+  { name: "Schaub Lorenz", brandImg: "schaub-lorenz.png" }, // 5
 ];
 
 export const series = [

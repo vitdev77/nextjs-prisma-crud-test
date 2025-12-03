@@ -63,7 +63,7 @@ const prisma = new PrismaClient({
 const brandData: Prisma.BrandCreateInput[] = [
   {
     name: "Midea",
-    imageUrl: "/brands/midea.png",
+    brandImg: "midea.png",
     series: {
       create: [
         {
@@ -89,19 +89,19 @@ const brandData: Prisma.BrandCreateInput[] = [
   },
   {
     name: "General Electronics",
-    imageUrl: "/brands/general-electronics.webp",
+    brandImg: "general-electronics.webp",
   },
   {
     name: "DEXP",
-    imageUrl: "/brands/dexp.png",
+    brandImg: "dexp.png",
   },
   {
     name: "Körting",
-    imageUrl: "/brands/koerting.svg",
+    brandImg: "koerting.svg",
   },
   {
     name: "Schaub Lorenz",
-    imageUrl: "/brands/schaub-lorenz.png",
+    brandImg: "schaub-lorenz.png",
   },
 ];
 
