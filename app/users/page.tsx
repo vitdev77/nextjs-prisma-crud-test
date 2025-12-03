@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -14,6 +15,10 @@ import { DeleteUserForm } from "@/components/forms";
 import { getUsers } from "@/actions/user.actions";
 import { ReturnButton } from "@/components/return-button";
 import { Separator } from "@/components/ui/separator";
+
+export const metadata: Metadata = {
+  title: "Users",
+};
 
 export default async function Users() {
   const users = await getUsers();

@@ -1,8 +1,13 @@
+import { Metadata } from "next";
 import { getPostById } from "@/actions/post.actions";
 import { EditPostComponent } from "@/components/edit-post-component";
 import { ReturnButton } from "@/components/return-button";
 import { Card, CardContent } from "@/components/ui/card";
 import { notFound } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Edit single post",
+};
 
 export default async function EditPostPage(props: {
   params: Promise<{ id: string }>;

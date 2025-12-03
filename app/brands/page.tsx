@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -14,6 +15,10 @@ import { DeleteBrandForm } from "@/components/forms";
 import { getBrands } from "@/actions/brand.actions";
 import { ReturnButton } from "@/components/return-button";
 import { Separator } from "@/components/ui/separator";
+
+export const metadata: Metadata = {
+  title: "Brands",
+};
 
 export default async function Brands() {
   const brands = await getBrands();
@@ -74,7 +79,7 @@ export default async function Brands() {
                   <TableCell>{brand.id}</TableCell>
                   <TableCell className="font-medium">{brand.name}</TableCell>
                   <TableCell>
-                    {brand.brandImg === null ? (
+                    {!brand.brandImg ? (
                       <span className="text-muted-foreground/50">
                         no image added
                       </span>

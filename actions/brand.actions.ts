@@ -31,6 +31,25 @@ export async function getBrandById({ brandId }: { brandId: string }) {
   }
 }
 
+// Get series list by Brand ID
+export async function getSeriesByBrandId({ brandId }: { brandId: string }) {
+  try {
+    const seriesByBrandId = await prisma.series.findMany({
+      where: {
+        brandId: Number(brandId),
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return seriesByBrandId;
+  } catch (error) {
+    console.error("Error fetching series by brand:", error);
+    throw new Error("Failed to retrieve series by brand from the database.");
+  }
+}
+
 // Create new brand
 export async function createBrand({
   name,
@@ -50,6 +69,27 @@ export async function createBrand({
     console.log(error);
     return {
       error: "[BRAND_CREATE]: SERVER ERROR",
+    };
+  }
+
+  revalidatePath("/brands");
+}
+
+// Edit single brand
+export async function editBrand({ id, name }: { id: string; name: string }) {
+  try {
+    await prisma.brand.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        name,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return {
+      error: "[BRAND_EDIT]: SERVER ERROR",
     };
   }
 

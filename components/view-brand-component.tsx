@@ -1,7 +1,6 @@
 import { BrandWithRelations } from "@/@types/prisma";
 import { cn } from "@/lib/utils";
-// import { SeriesByBrandList } from "@/components/lists/series-by-brand-list";
-import { UserPostsProvider } from "@/components/providers";
+import { SeriesByBrandList } from "@/components/lists/series-by-brand-list";
 
 interface Props {
   brand: BrandWithRelations;
@@ -12,8 +11,7 @@ export function ViewBrandComponent({ brand, className }: Props) {
   return (
     <div className={cn("space-y-2", className)}>
       <h2 className="text-2xl font-bold">{brand.name}</h2>
-      {/* TODO */}
-      {/* <SeriesByBrandList brandId={String(brand.id)} /> */}
+      <SeriesByBrandList brandId={String(brand.id)} />
     </div>
   );
 }

@@ -1,8 +1,13 @@
+import { Metadata } from "next";
 import { getUserById } from "@/actions/user.actions";
 import { ReturnButton } from "@/components/return-button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ViewUserComponent } from "@/components/view-user-component";
 import { notFound } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "View single user",
+};
 
 export default async function UserPage(props: {
   params: Promise<{ id: string }>;

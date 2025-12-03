@@ -1,6 +1,11 @@
+import { Metadata } from "next";
 import { CreatePostComponent } from "@/components/create-post-component";
 import { ReturnButton } from "@/components/return-button";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Create new post",
+};
 
 export default function NewPostPage() {
   return (

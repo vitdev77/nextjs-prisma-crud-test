@@ -8,3 +8,4 @@ export { EditUserForm } from "./edit-user-form";
 
 export { CreateBrandForm } from "./create-brand-form";
 export { DeleteBrandForm } from "./delete-brand-form";
+export { EditBrandForm } from "./edit-brand-form";

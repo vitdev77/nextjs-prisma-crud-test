@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Check, Eye, Home, Pencil, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +14,10 @@ import { DeletePostForm } from "@/components/forms";
 import { getPosts } from "@/actions/post.actions";
 import { ReturnButton } from "@/components/return-button";
 import { Separator } from "@/components/ui/separator";
+
+export const metadata: Metadata = {
+  title: "Posts",
+};
 
 export default async function Posts() {
   const posts = await getPosts();

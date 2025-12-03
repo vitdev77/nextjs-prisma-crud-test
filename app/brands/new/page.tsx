@@ -1,6 +1,11 @@
+import { Metadata } from "next";
 import { CreateBrandComponent } from "@/components/create-brand-component";
 import { ReturnButton } from "@/components/return-button";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Create new brand",
+};
 
 export default function NewBrandPage() {
   return (
