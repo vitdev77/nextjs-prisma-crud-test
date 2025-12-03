@@ -22,3 +22,42 @@ export const productColors = [
   { name: "Inox" }, // 4
   { name: "Basalt Gray" }, // 5
 ];
+
+// TEMP data users
+export const temp_users = [
+  { name: "Alice", email: "alice@prisma.io", id: 1 },
+  { name: "Bob", email: "bob@prisma.io", id: 2 },
+  { name: "John", email: "john@prisma.io", id: 3 },
+];
+
+// TEMP data posts
+export const temp_posts = [
+  {
+    title: "Join the Prisma Discord",
+    content: "https://pris.ly/discord",
+    published: true,
+    authorId: 1,
+  },
+  {
+    title: "Prisma on YouTube",
+    content: "https://pris.ly/youtube",
+    authorId: 1,
+  },
+  {
+    title: "Follow Prisma on Twitter",
+    content: "https://www.twitter.com/prisma",
+    published: true,
+    authorId: 2,
+  },
+  {
+    title: "Prisma CRUD",
+    content: "https://www.prisma.io/docs/orm/prisma-client/queries/crud",
+    published: true,
+    authorId: 3,
+  },
+  {
+    title: "Design Your Perfect shadcn/ui Theme",
+    content: "https://tweakcn.com/",
+    authorId: 3,
+  },
+];

@@ -17,10 +17,10 @@ import type * as Prisma from "./prismaNamespace"
 
 const config: runtime.GetPrismaClientConfig = {
   "previewFeatures": [],
-  "clientVersion": "7.0.1",
-  "engineVersion": "f09f2815f091dbba658cdcd2264306d88bb5bda6",
+  "clientVersion": "7.1.0",
+  "engineVersion": "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id Int @id @default(autoincrement())\n\n  email String  @unique\n  name  String?\n\n  posts Post[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Post {\n  id Int @id @default(autoincrement())\n\n  title     String\n  content   String?\n  published Boolean @default(false)\n\n  authorId Int\n  author   User @relation(fields: [authorId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"posts\")\n}\n\nmodel Brand {\n  id Int @id @default(autoincrement())\n\n  name     String  @unique\n  brandImg String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  series Series[]\n\n  @@map(\"brands\")\n}\n\nmodel Series {\n  id Int @id @default(autoincrement())\n\n  name    String @unique\n  brandId Int\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  brand Brand @relation(fields: [brandId], references: [id])\n\n  products Product[]\n\n  @@map(\"series\")\n}\n\nmodel Product {\n  id Int @id @default(autoincrement())\n\n  name           String  @unique\n  productImg     String?\n  seriesId       Int\n  productColorId Int\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  series Series @relation(fields: [seriesId], references: [id])\n\n  @@map(\"products\")\n}\n\nmodel ProductColor {\n  id Int @id @default(autoincrement())\n\n  name String\n\n  createdAt DateTime @default(now())\n  updatadAt DateTime @updatedAt\n\n  // TODO: ????????\n  // products Product[]\n\n  @@map(\"product_colors\")\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id Int @id @default(autoincrement())\n\n  email String  @unique\n  name  String?\n\n  posts Post[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Post {\n  id Int @id @default(autoincrement())\n\n  title     String\n  content   String?\n  published Boolean @default(false)\n\n  authorId Int\n  author   User @relation(fields: [authorId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"posts\")\n}\n\nmodel Brand {\n  id Int @id @default(autoincrement())\n\n  name     String  @unique\n  brandImg String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  series Series[]\n\n  @@map(\"brands\")\n}\n\nmodel Series {\n  id Int @id @default(autoincrement())\n\n  name    String @unique\n  brandId Int\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  brand Brand @relation(fields: [brandId], references: [id], onDelete: Cascade)\n\n  products Product[]\n\n  @@map(\"series\")\n}\n\nmodel Product {\n  id Int @id @default(autoincrement())\n\n  name           String  @unique\n  productImg     String?\n  seriesId       Int\n  productColorId Int\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  series Series @relation(fields: [seriesId], references: [id], onDelete: Cascade)\n\n  @@map(\"products\")\n}\n\nmodel ProductColor {\n  id Int @id @default(autoincrement())\n\n  name String\n\n  createdAt DateTime @default(now())\n  updatadAt DateTime @updatedAt\n\n  // TODO: ????????\n  // products Product[]\n\n  @@map(\"product_colors\")\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -62,7 +62,7 @@ export interface PrismaClientConstructor {
    * const users = await prisma.user.findMany()
    * ```
    * 
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+   * Read more in our [docs](https://pris.ly/d/client).
    */
 
   new <
@@ -84,7 +84,7 @@ export interface PrismaClientConstructor {
  * const users = await prisma.user.findMany()
  * ```
  * 
- * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+ * Read more in our [docs](https://pris.ly/d/client).
  */
 
 export interface PrismaClient<
@@ -113,7 +113,7 @@ export interface PrismaClient<
    * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
 
@@ -125,7 +125,7 @@ export interface PrismaClient<
    * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
 
@@ -136,7 +136,7 @@ export interface PrismaClient<
    * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
 
@@ -148,7 +148,7 @@ export interface PrismaClient<
    * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
 

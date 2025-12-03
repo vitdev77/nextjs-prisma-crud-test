@@ -24,8 +24,8 @@ export default async function Brands() {
   const brands = await getBrands();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-6">
-      <div className="flex items-center justify-between gap-6 min-w-4xl mx-auto">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-6">
+      <div className="mx-auto flex min-w-4xl items-center justify-between gap-6">
         <div className="flex flex-wrap items-center gap-4">
           <h1 className="text-4xl font-bold">Brands</h1>
           <Button asChild>
@@ -34,7 +34,7 @@ export default async function Brands() {
             </Link>
           </Button>
         </div>
-        <div className="flex items-center gap-2 h-5">
+        <div className="flex h-5 items-center gap-2">
           <ReturnButton
             btnVariant="link"
             href="/series"
@@ -50,14 +50,15 @@ export default async function Brands() {
         </div>
       </div>
 
-      <div className="min-w-4xl mx-auto">
+      <div className="mx-auto min-w-4xl">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">Brand ID</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Image Path</TableHead>
-              <TableHead>Created at</TableHead>
+              <TableHead>Series Count</TableHead>
+              <TableHead>Created At</TableHead>
               <TableHead className="text-muted-foreground text-right">
                 Actions
               </TableHead>
@@ -67,8 +68,8 @@ export default async function Brands() {
             {brands.length === 0 ? (
               <TableRow>
                 <TableCell
-                  colSpan={5}
-                  className="text-center text-muted-foreground"
+                  colSpan={6}
+                  className="text-muted-foreground text-center"
                 >
                   no brand found
                 </TableCell>
@@ -87,6 +88,7 @@ export default async function Brands() {
                       `/brands/${brand.brandImg}`
                     )}
                   </TableCell>
+                  <TableCell className="text-muted-foreground">soon</TableCell>
                   <TableCell>
                     {String(brand.createdAt.toLocaleDateString())}
                   </TableCell>

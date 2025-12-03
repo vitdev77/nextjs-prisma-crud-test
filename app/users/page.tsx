@@ -24,8 +24,8 @@ export default async function Users() {
   const users = await getUsers();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-6">
-      <div className="flex items-center justify-between gap-6 min-w-4xl mx-auto">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-6">
+      <div className="mx-auto flex min-w-4xl items-center justify-between gap-6">
         <div className="flex flex-wrap items-center gap-4">
           <h1 className="text-4xl font-bold">Users</h1>
           <Button asChild>
@@ -34,7 +34,7 @@ export default async function Users() {
             </Link>
           </Button>
         </div>
-        <div className="flex items-center gap-2 h-5">
+        <div className="flex h-5 items-center gap-2">
           <ReturnButton
             btnVariant="link"
             href="/posts"
@@ -50,14 +50,15 @@ export default async function Users() {
         </div>
       </div>
 
-      <div className="min-w-4xl mx-auto">
+      <div className="mx-auto min-w-4xl">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">User ID</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Created at</TableHead>
+              <TableHead>Posts Count</TableHead>
+              <TableHead>Created At</TableHead>
               <TableHead className="text-muted-foreground text-right">
                 Actions
               </TableHead>
@@ -67,8 +68,8 @@ export default async function Users() {
             {users.length === 0 ? (
               <TableRow>
                 <TableCell
-                  colSpan={5}
-                  className="text-center text-muted-foreground"
+                  colSpan={6}
+                  className="text-muted-foreground text-center"
                 >
                   no user found
                 </TableCell>
@@ -79,6 +80,7 @@ export default async function Users() {
                   <TableCell>{user.id}</TableCell>
                   <TableCell className="font-medium">{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
+                  <TableCell className="text-muted-foreground">soon</TableCell>
                   <TableCell className="text-muted-foreground">
                     {String(user.createdAt.toLocaleDateString())}
                   </TableCell>

@@ -12,22 +12,22 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getSeriesByBrandId } from "@/actions/brand.actions";
+import { getProductsBySeriesId } from "@/actions/series.actions";
 
-export function SeriesByBrandList({ brandId }: { brandId: string }) {
+export function ProductsBySeriesList({ seriesId }: { seriesId: string }) {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
-  const [series, setSeries] = React.useState<{ id: number; name: string }[]>(
-    [],
-  );
+  const [products, setProducts] = React.useState<
+    { id: number; name: string }[]
+  >([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true); // Set loading to true before fetching data
       setError(null); // Clear any previous errors
       try {
-        const response = await getSeriesByBrandId({ brandId });
-        setSeries(response);
+        const response = await getProductsBySeriesId({ seriesId });
+        setProducts(response);
       } catch (err) {
         console.log(err);
         setError(error);
@@ -44,38 +44,40 @@ export function SeriesByBrandList({ brandId }: { brandId: string }) {
         <Skeleton className="h-10 w-full" />
       ) : (
         <Table>
-          {series.length === 0 ? null : (
-            <TableCaption>A list of brand&apos;s series.</TableCaption>
+          {products.length === 0 ? null : (
+            <TableCaption>A list of series products.</TableCaption>
           )}
           <TableHeader>
             <TableRow>
               <TableHead>ID</TableHead>
-              <TableHead>Name</TableHead>
+              <TableHead>Product</TableHead>
+              <TableHead>Color</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {series.length === 0 ? (
+            {products.length === 0 ? (
               <TableRow>
                 <TableCell
-                  colSpan={2}
+                  colSpan={3}
                   className="text-muted-foreground text-center"
                 >
-                  no series added yet
+                  no products added yet
                 </TableCell>
               </TableRow>
             ) : (
-              series.map((seriesItem) => (
-                <TableRow key={seriesItem.id}>
-                  <TableCell>{seriesItem.id}</TableCell>
+              products.map((product) => (
+                <TableRow key={product.id}>
+                  <TableCell>{product.id}</TableCell>
                   <TableCell className="font-medium">
                     <Link
-                      href={`/series/edit/${seriesItem.id}`}
+                      href={`/products/edit/${product.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {seriesItem.name}
+                      {product.name}
                     </Link>
                   </TableCell>
+                  <TableCell>-</TableCell>
                 </TableRow>
               ))
             )}
