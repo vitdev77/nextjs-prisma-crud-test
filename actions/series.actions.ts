@@ -10,6 +10,9 @@ export async function getSeries() {
       include: {
         brand: true,
       },
+      orderBy: {
+        updatedAt: "desc",
+      },
     });
 
     return series;
@@ -89,7 +92,15 @@ export async function createSeries({
 }
 
 // Edit single series
-export async function editSeries({ id, name }: { id: string; name: string }) {
+export async function editSeries({
+  id,
+  name,
+  brandId,
+}: {
+  id: string;
+  name: string;
+  brandId: string;
+}) {
   try {
     await prisma.series.update({
       where: {
@@ -97,6 +108,7 @@ export async function editSeries({ id, name }: { id: string; name: string }) {
       },
       data: {
         name,
+        brandId: Number(brandId),
       },
     });
   } catch (error) {

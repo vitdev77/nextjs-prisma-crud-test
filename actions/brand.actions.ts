@@ -6,7 +6,11 @@ import { revalidatePath } from "next/cache";
 // Get all brands
 export async function getBrands() {
   try {
-    const brands = await prisma.brand.findMany({});
+    const brands = await prisma.brand.findMany({
+      orderBy: {
+        updatedAt: "desc",
+      },
+    });
 
     return brands;
   } catch (error) {
